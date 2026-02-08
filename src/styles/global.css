@@ -37,11 +37,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Mobile scroll optimization - prevent flickering */
-  * {
+  /* ONLY composite fixed/animated elements - NOT everything */
+  #webgl,
+  nav[class*="fixed"] {
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
   }
 
   /* Reduce layout thrashing */
@@ -58,22 +58,19 @@
       transform: translateZ(0);
     }
   }
-
-  /* Remove containment from sections to prevent mobile scroll issues */
-  section {
-    will-change: transform;
-  }
 }
 
-/* WebGL Canvas Container */
+/* WebGL Canvas Container - iOS-safe viewport */
 #webgl {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100svh;
+  height: 100vh;
+  height: 100dvh; /* iOS-safe dynamic viewport */
   pointer-events: none;
   z-index: 1;
+  transform: translateZ(0);
 }
 
 #webgl canvas {
@@ -95,14 +92,17 @@
     contain: strict;
   }
 
-  /* GPU acceleration hints */
+  /* GPU acceleration hints - only on hover/active */
   .gpu-accelerate {
     transform: translateZ(0);
-    will-change: transform;
   }
 
-  .gpu-accelerate-opacity {
-    will-change: opacity;
+  /* Add will-change only during interaction, not permanently */
+  button:hover,
+  button:active,
+  [data-particle-hover]:hover,
+  [data-particle-hover]:active {
+    will-change: transform;
   }
 }
 
