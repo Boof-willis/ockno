@@ -4,8 +4,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Sentient', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        sentient: ['Sentient', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      fontWeight: {
+        extralight: '200',
+        light: '300',
       },
       colors: {
         page: '#020203',
@@ -41,12 +46,12 @@ export default {
           '100%': { transform: 'translateX(100%)' },
         },
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+          '0%, 100%': { transform: 'translateY(0) translateZ(0)' },
+          '50%': { transform: 'translateY(-10px) translateZ(0)' },
         },
         'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+          '0%': { opacity: '0', transform: 'translateY(20px) translateZ(0)' },
+          '100%': { opacity: '1', transform: 'translateY(0) translateZ(0)' },
         },
         shine: {
           '0%': { backgroundPosition: '200% center' },
