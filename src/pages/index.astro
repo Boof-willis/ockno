@@ -134,9 +134,8 @@ import GLWrapper from '../components/gl/GLWrapper';
             transform: scale(1.05) translateZ(0);
         }
 
-        /* Content visibility for off-screen sections */
+        /* Content visibility - removed to prevent iOS recomposite issues */
         section:not(:first-of-type) {
-            content-visibility: auto;
             contain-intrinsic-size: auto 600px;
         }
 
@@ -881,6 +880,31 @@ import GLWrapper from '../components/gl/GLWrapper';
 
     <!-- Optimized scripts - defer non-critical JS -->
     <script>
+        // iOS momentum scroll optimization - hide WebGL during scroll to prevent flicker
+        if ('ontouchstart' in window) {
+            let scrollTimeout;
+            let isScrolling = false;
+            
+            const startScroll = () => {
+                if (!isScrolling) {
+                    document.body.classList.add('is-scrolling');
+                    isScrolling = true;
+                }
+                clearTimeout(scrollTimeout);
+            };
+            
+            const endScroll = () => {
+                scrollTimeout = setTimeout(() => {
+                    document.body.classList.remove('is-scrolling');
+                    isScrolling = false;
+                }, 150);
+            };
+            
+            window.addEventListener('scroll', startScroll, { passive: true });
+            window.addEventListener('scroll', endScroll, { passive: true });
+            window.addEventListener('touchend', endScroll, { passive: true });
+        }
+        
         // Mobile Menu - DOM manipulation after parse
         document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('mobile-menu-btn');
