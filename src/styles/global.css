@@ -37,10 +37,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* iOS Safari scroll optimization */
+  /* Mobile scroll optimization - prevent flickering */
   * {
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
   }
 
   /* Reduce layout thrashing */
@@ -58,9 +59,9 @@
     }
   }
 
-  /* Optimize repaints */
+  /* Remove containment from sections to prevent mobile scroll issues */
   section {
-    contain: layout style;
+    will-change: transform;
   }
 }
 
