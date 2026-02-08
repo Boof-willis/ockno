@@ -37,6 +37,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* iOS Safari scroll optimization */
+  * {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+
   /* Reduce layout thrashing */
   img, video, iframe {
     content-visibility: auto;

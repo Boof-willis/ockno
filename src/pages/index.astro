@@ -185,10 +185,10 @@ import GLWrapper from '../components/gl/GLWrapper';
 
     <main class="relative z-10">
         <!-- Hero Section -->
-        <section class="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden" style="min-height: 100vh; contain: layout style;">
+        <section class="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden" style="min-height: 100vh;">
             
-            <!-- Barely Frosted Glass Overlay -->
-            <div class="absolute inset-0 pointer-events-none" style="backdrop-filter: blur(0.5px); -webkit-backdrop-filter: blur(0.5px); background: rgba(255, 255, 255, 0.01);"></div>
+            <!-- Barely Frosted Glass Overlay - removed backdrop-filter to fix iOS flickering -->
+            <div class="absolute inset-0 pointer-events-none" style="background: rgba(255, 255, 255, 0.01);"></div>
 
             <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
                 <!-- Eyebrow Badge - futuristic octagon with proper borders -->
